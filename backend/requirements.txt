@@ -2,7 +2,6 @@ fastapi
 uvicorn
 python-dotenv
 pypdf
-asyncio
 livekit
 livekit-agents
 livekit-plugins-openai
