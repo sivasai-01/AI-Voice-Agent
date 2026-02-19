@@ -163,10 +163,10 @@ VITE_API_BASE=https://ai-voice-agent-backend.vercel.app
 2. Click "Environment"
 3. Add:
    ```
-   LIVEKIT_URL=wss://ai-voice-agent-q263s6bf.livekit.cloud
-   LIVEKIT_API_KEY=APIQYAtrB33vEFT
-   LIVEKIT_API_SECRET=9PyucputUV4DCVPF4vwmWx5QbQOAe1cUu9fInArpJux
-   GOOGLE_API_KEY=AIzaSyAwtnSCRAZBtbjvdrOC0F0iyBfpZwHT6CE
+    GOOGLE_API_KEY=AIzaSyD...
+    LIVEKIT_URL=wss://your-project.livekit.cloud
+    LIVEKIT_API_KEY=your-key
+    LIVEKIT_API_SECRET=your-secret
    ```
 
 **3.4 Get Backend URL:**
