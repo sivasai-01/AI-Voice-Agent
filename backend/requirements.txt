@@ -6,7 +6,7 @@ livekit
 livekit-agents
 livekit-plugins-openai
 livekit-plugins-google
-google-generativeai
+google-genai
 sentence-transformers
 faiss-cpu
 numpy

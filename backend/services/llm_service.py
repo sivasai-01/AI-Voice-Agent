@@ -1,12 +1,11 @@
 import asyncio
 import os
-import google.generativeai as genai
+from google import genai
 
 class LLMService:
     def __init__(self):
         api_key = os.getenv("GOOGLE_API_KEY")
-        genai.configure(api_key=api_key)
-        self.model = genai.GenerativeModel('gemini-3-flash-preview')
+        self.client = genai.Client(api_key=api_key)
 
     async def generate_reply(self, system_prompt: str, context: str, user_query: str):
         full_prompt = f"""
@@ -21,7 +20,11 @@ USER QUESTION:
 REPLY:
 """
         try:
-            response = await asyncio.to_thread(self.model.generate_content, full_prompt)
+            response = await asyncio.to_thread(
+                self.client.models.generate_content,
+                model='gemini-3-flash-preview',
+                contents=full_prompt,
+            )
             return response.text
         except Exception as e:
             return f"Error generating response: {str(e)}"
