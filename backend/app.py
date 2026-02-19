@@ -15,6 +15,9 @@ import io
 from services.rag_service import RAGService
 from services.llm_service import LLMService
 
+print("🔥 APP FILE LOADED")
+
+
 load_dotenv()
 
 app = FastAPI(title="Voice AI Orchestrator API")
@@ -31,8 +34,20 @@ system_prompt_storage = {
     "current": "You are a real-time conversational AI voice assistant. Speak naturally and concisely. Use KB context first when available. Do not hallucinate."
 }
 
-rag_service = RAGService()
-llm_service = LLMService()
+rag_service = None
+llm_service = None
+
+@app.on_event("startup")
+async def startup_event():
+    global rag_service, llm_service
+    print("🚀 Starting services...")
+
+    try:
+        rag_service = RAGService()
+        llm_service = LLMService()
+        print("✅ Services initialized")
+    except Exception as e:
+        print("❌ Startup failed:", str(e))
 
 class PromptUpdate(BaseModel):
     prompt: str
