@@ -74,6 +74,11 @@ async def upload_document(file: UploadFile = File(...)):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
+@app.get("/health")
+async def health_check():
+    """Health check endpoint for Render."""
+    return {"status": "ok"}
+
 @app.get("/livekit-config")
 async def get_livekit_config():
     """Return LiveKit config for the frontend."""
@@ -118,17 +123,22 @@ if __name__ == "__main__":
     for var in required_vars:
         if not os.getenv(var):
             print(f"Warning: {var} is not set in environment.")
-    # Start the LiveKit agent as a subprocess so it runs alongside the API.
+    
+    # Get port from environment (Render sets $PORT, default to 8000 for local)
+    port = int(os.getenv("PORT", 8000))
+    
+    # Start the LiveKit agent as a subprocess (non-blocking)
     # This uses the same Python interpreter and runs services/livekit_agent.py with the
     # 'dev' argument (matching how you'd run it manually).
     agent_script = os.path.join(os.path.dirname(__file__), "services", "livekit_agent.py")
     if os.path.exists(agent_script):
         try:
             print("Starting LiveKit agent subprocess...")
-            agent_proc = subprocess.Popen([sys.executable, agent_script, "dev"], cwd=os.path.dirname(__file__))
+            subprocess.Popen([sys.executable, agent_script, "dev"], cwd=os.path.dirname(__file__))
         except Exception as e:
             print(f"Failed to start LiveKit agent subprocess: {e}")
+            # Continue anyway - the API will still work
     else:
         print(f"LiveKit agent script not found at {agent_script}; skipping agent startup.")
 
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=port)
