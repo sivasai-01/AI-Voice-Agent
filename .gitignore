@@ -1,0 +1,59 @@
+# Root-level .gitignore for AI Voice Agent project
+# Subdirectories (frontend/, backend/) have their own .gitignore files
+
+## Project-specific files
+.env
+.env.local
+.env.*.local
+.DS_Store
+Thumbs.db
+
+## IDEs and Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*.sublime-*
+*.code-workspace
+
+## OS-specific
+.AppleDouble
+.LSOverride
+.windows
+.linux
+
+## Logs
+logs/
+*.log
+npm-debug.log*
+yarn-error.log*
+
+## Build artifacts
+dist/
+build/
+*.egg-info/
+
+## Cache directories
+.cache/
+.pytest_cache/
+.mypy_cache/
+__pycache__/
+
+## IDE-specific
+*.pyc
+*.pyo
+
+## Optional files
+.vscode-settings.json
+launch.json
+
+## Documentation builds
+docs/_build/
+
+## Temporary files
+*.tmp
+*.temp
+*~
+
+# Note: frontend/ and backend/ directories have additional specific rules
+# in their own .gitignore files for node_modules/, venv/, etc.

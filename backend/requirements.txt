@@ -1,0 +1,16 @@
+fastapi
+uvicorn
+python-dotenv
+pypdf
+asyncio
+livekit
+livekit-agents
+livekit-plugins-openai
+livekit-plugins-google
+google-generativeai
+sentence-transformers
+faiss-cpu
+numpy
+pydantic
+python-multipart
+langchain-text-splitters
